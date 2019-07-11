@@ -26,6 +26,18 @@ class ProductController extends AbstractController
     }
 
     /**
+     * @Route("/show/{category}/{tags}", name="show", methods={"GET"})
+     */
+    public function showAction($category, $tags)
+    {
+        $product =  $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->findBy(['category' => $category, 'tags' => $tags ]);
+
+        return $this->render('product/show.html.twig', ['product' => $product]);
+    }
+
+    /**
      * @Route("/new", name="product_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response

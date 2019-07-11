@@ -21,6 +21,11 @@ class Category
      */
     private $libelle;
 
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
