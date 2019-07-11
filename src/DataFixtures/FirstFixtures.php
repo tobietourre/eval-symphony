@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Controller\ProductController;
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -12,8 +11,8 @@ use function Sodium\add;
 
 class FirstFixtures extends Fixture
 {
-    public const CATEGORIES = array();
-    public const  TAGS = array();
+    public const CATEGORIES = 'test';
+    public const  TAGS = 'test';
 
     public function load(ObjectManager $manager)
     {
@@ -24,7 +23,7 @@ class FirstFixtures extends Fixture
             $category = new Category();
             $category->setLibelle($categoryName[$i]);
             $manager->persist($category);
-            $listCat->add($category);
+            $listCat[$i] = $category;
         }
 
         $tagName = ['fruit', 'legumes', 'acide', 'sucre','condiments', 'audio', 'video', 'pc', 'tablette', 'ram', 'processeur',
@@ -34,11 +33,11 @@ class FirstFixtures extends Fixture
             $tag = new Tag();
             $tag->setLibelle($tagName[$i]);
             $manager->persist($tag);
-            $listTag->add($tag);
+            $listTag[$i] = $tag;
         }
 
         $manager->flush();
         $this->addReference(self::CATEGORIES, $listCat);
-        $this->addReference(self::TAG, $listTag);
+        $this->addReference(self::TAGS, $listTag);
     }
 }
