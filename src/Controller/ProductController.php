@@ -26,15 +26,27 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/show/{category}/{tags}", name="show", methods={"GET"})
+     * @Route("/categorized/{category}", name="showByCategory", methods={"GET"})
      */
-    public function showAction($category, $tags)
+    public function showByCategoryAction($category)
     {
-        $product =  $this->getDoctrine()
+        $products =  $this->getDoctrine()
             ->getRepository(Product::class)
-            ->findBy(['category' => $category, 'tags' => $tags ]);
+            ->findBy(['category' => $category,]);
 
-        return $this->render('product/show.html.twig', ['product' => $product]);
+        return $this->render('product/showByCategory.html.twig', ['products' => $products]);
+    }
+
+    /**
+     * @Route("/tagged/{tags}", name="showByTags", methods={"GET"})
+     */
+    public function showByTagAction($tags)
+    {
+        $products =  $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->findBy(['tags' => $tags,]);
+
+        return $this->render('product/showByTag.html.twig', ['products' => $products]);
     }
 
     /**
@@ -103,4 +115,6 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('product_index');
     }
+
+    
 }

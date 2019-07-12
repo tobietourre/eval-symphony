@@ -48,6 +48,7 @@ class Product
      */
     private $prix;
 
+
     public function __construct()
     {
         $this->tag = new ArrayCollection();
@@ -147,5 +148,17 @@ class Product
     public function __toString()
     {
         return $this->getLibelle();
+    }
+
+    public function getCategorie(): ?Category
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Category $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 }

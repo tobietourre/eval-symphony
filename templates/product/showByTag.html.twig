@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <h1>Product</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ product.id }}</td>
+        </tr>{% extends 'base.html.twig' %}
+
+        {% block title %}Product index{% endblock %}
+
+        {% block body %}
+            <h1>Product index</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Libelle</th>
+                    <th>Description</th>
+                    <th>Nb_likes</th>
+                    <th>Prix</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.libelle }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.nbLikes }}</td>
+                        <td>{{ product.prix }}</td>
+                        <td>
+                            <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
+                            <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{{ path('product_new') }}">Create new</a>
+        {% endblock %}
+
+        <tr>
+            <th>Libelle</th>
+            <td>{{ product.libelle }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ product.description }}</td>
+        </tr>
+        <tr>
+            <th>Nb_likes</th>
+            <td>{{ product.nbLikes }}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ product.prix }}</td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>{{ product.category }}</td>
+        </tr>
+        <tr>
+            <th>Tags</th>
+            <td>{{ product.tag }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('product_index') }}">back to list</a>
+
+    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+
+    {{ include('product/_delete_form.html.twig') }}
+{% endblock %}
